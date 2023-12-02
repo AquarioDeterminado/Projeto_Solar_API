@@ -4,7 +4,8 @@ import pt.iade.projetosolar.models.dao.User;
 
 public class UserController {
 
-    public static User getUserFromDBO (String userName, String passWord){
-        return new User(userName, passWord);
+    public static User getUserFromDB (String userName, String passWord){
+        UserRepository userRepository = new UserRepository();
+        return ;
     }
 }
