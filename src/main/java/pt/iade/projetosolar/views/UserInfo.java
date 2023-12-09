@@ -1,6 +1,5 @@
 package pt.iade.projetosolar.views;
 
-
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pt.iade.projetosolar.controllers.LogInController;

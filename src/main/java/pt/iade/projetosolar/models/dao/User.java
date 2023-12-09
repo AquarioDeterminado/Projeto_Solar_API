@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.sql.Date;
 
 interface UserRepoitory extends CrudRepository<User, Integer> {
-    User findByEmailAndPassword(String email);
+    User fin(String email);
 }
 
 @Entity
@@ -24,7 +24,7 @@ public class User {
     @Column(name = "ind_active") private boolean isActive;
 
     public User() {
-        this.creationDate = new Date(System.currentTime());
+        this.creationDate = new Date(System.currentTimeMillis());
         this.isActive = true;
     }
 

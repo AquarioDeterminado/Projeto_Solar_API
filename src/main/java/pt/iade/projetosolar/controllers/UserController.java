@@ -1,11 +1,10 @@
 package pt.iade.projetosolar.controllers;
 
-import pt.iade.projetosolar.models.dao.User;
-
 public class UserController {
-
-    public static User getUserFromDB (String userName, String passWord){
+    /*
+    public static User getUserFromDB (String email, String passWord){
         UserRepository userRepository = new UserRepository();
-        return ;
+        return userRepository.findByEmailAndPassword(email, passWord);
     }
+    */
 }
