@@ -5,10 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.sql.Date;
 
-interface UserRepoitory extends CrudRepository<User, Integer> {
-    User fin(String email);
-}
-
 @Entity
 @Table(name = "individual")
 public class User {

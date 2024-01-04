@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="localhost:8080/Solar/deskReserve/showSpaceLayout/style">
+
+		<script type="text/javascript">
+			function reserve (self) {
+				console.log("id: " + self.id)
+				//loadStorage.setItem("id", _id);
+				//Android.reserveTable(_id);
+			}
+		</script>
+
+	</head>
+	<body>
+	<svg id="FloorPlan" data-name="FloorPlan" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.2 340">
+		<title>
+			{FloorPlanTitle}
+		</title>
+		<g id="Plant">
+			<polyline class="wall" points="0.5 28.5 128.5 29.5 128.5 0.5 233.5 0.5 233.5 29.5 233.5 224.5 103.5 224.5 103.5 339.5 0.5 339.5 0.5 28.5"/>
+			<path class="door" d="M.5,153.6H19.3a20.87,20.87,0,0,1-6,11.2C7.9,169.8.5,170,.5,170" transform="translate(-0.1)"/>
+			<path class="door" d="M170.8,225.2l-.2-18.8a19.75,19.75,0,0,1,11.3,5.9c5,5.4,5.2,12.8,5.3,12.8" transform="translate(-0.1)"/>
+			<path class="door" d="M171.5,225.1l-.2-18.8a20.38,20.38,0,0,0-11.2,6.1c-4.9,5.5-4.9,12.9-5,12.9" transform="translate(-0.1)"/>
+
+		</g>
+		<g id="Tables">
+			<polygon class="notReservable" id="table1" points="141.7 42.9 141.7 30.9 164.4 31.3 164.4 43.3" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table2" points="168.4 42.9 168.4 30.9 191.1 31.3 191.1 43.3" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table3" points="195.1 42.9 195.1 30.9 217.8 31.3 217.8 43.3" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table4" points="32.7 73.8 20.8 73.8 21.1 51.1 33.1 51.1 32.7 73.8" onClick="reserve(this);"/>
+			<polygon class="notReservable" id="table5" points="48.2 73.8 36.3 73.8 36.7 51.1 48.7 51.1 48.2 73.8" onClick="reserve(this);"/>
+			<polygon class="notReservable" id="table6" points="32.7 100.5 20.8 100.5 21.1 77.8 33.1 77.8 32.7 100.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table7" points="48.2 100.5 36.3 100.5 36.7 77.8 48.7 77.8 48.2 100.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table8" points="32.7 127.2 20.8 127.2 21.1 104.5 33.1 104.5 32.7 127.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table9" points="48.2 127.2 36.3 127.2 36.7 104.5 48.7 104.5 48.2 127.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table10" points="164.4 15.8 164.4 27.8 141.7 27.4 141.7 15.4 164.4 15.8" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table11" points="191.1 15.8 191.1 27.8 168.4 27.4 168.4 15.4 191.1 15.8" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table12" points="217.8 15.8 217.8 27.8 195.1 27.4 195.1 15.4 217.8 15.8" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table13" points="98 73.8 86 73.8 86.4 51.1 98.4 51.1 98 73.8" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table14" points="113.5 73.8 101.6 73.8 102 51.1 113.9 51.1 113.5 73.8" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table15" points="98 100.5 86 100.5 86.4 77.8 98.4 77.8 98 100.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table16" points="113.5 100.5 101.6 100.5 102 77.8 113.9 77.8 113.5 100.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table17" points="98 127.2 86 127.2 86.4 104.5 98.4 104.5 98 127.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table18" points="113.5 127.2 101.6 127.2 102 104.5 113.9 104.5 113.5 127.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table19" points="175.2 104.4 163.2 104.4 163.6 81.7 175.6 81.7 175.2 104.4" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table20" points="190.7 104.4 178.8 104.4 179.2 81.7 191.1 81.7 190.7 104.4" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table21" points="175.2 131.1 163.2 131.1 163.6 108.3 175.6 108.3 175.2 131.1" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table22" points="190.7 131.1 178.8 131.1 179.2 108.3 191.1 108.3 190.7 131.1" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table23" points="175.2 157.8 163.2 157.8 163.6 135 175.6 135 175.2 157.8" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table24" points="190.7 157.8 178.8 157.8 179.2 135 191.1 135 190.7 157.8" onclick="reserve(this);" />
+			<polygon class="notReservable" id="table25" points="31.1 270.5 19.2 270.5 19.6 247.8 31.5 247.8 31.1 270.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table26" points="46.7 270.5 34.7 270.5 35.1 247.8 47.1 247.8 46.7 270.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table27" points="31.1 297.2 19.2 297.2 19.6 274.5 31.5 274.5 31.1 297.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table28" points="46.7 297.2 34.7 297.2 35.1 274.5 47.1 274.5 46.7 297.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table29" points="31.1 323.9 19.2 323.9 19.6 301.2 31.5 301.2 31.1 323.9" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table30" points="46.7 323.9 34.7 323.9 35.1 301.2 47.1 301.2 46.7 323.9" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table31" points="75.1 270.5 63.1 270.5 63.5 247.8 75.5 247.8 75.1 270.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table32" points="90.6 270.5 78.7 270.5 79.1 247.8 91 247.8 90.6 270.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table33" points="75.1 297.2 63.1 297.2 63.5 274.5 75.5 274.5 75.1 297.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table34" points="90.6 297.2 78.7 297.2 79.1 274.5 91 274.5 90.6 297.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table35" points="75.1 323.9 63.1 323.9 63.5 301.2 75.5 301.2 75.1 323.9" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table36" points="90.6 323.9 78.7 323.9 79.1 301.2 91 301.2 90.6 323.9" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table37" points="141.6 273.5 129.7 273.5 130.1 250.8 142 250.8 141.6 273.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table38" points="157.2 273.5 145.2 273.5 145.6 250.8 157.6 250.8 157.2 273.5" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table39" points="141.6 300.2 129.7 300.2 130.1 277.5 142 277.5 141.6 300.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table40" points="157.2 300.2 145.2 300.2 145.6 277.5 157.6 277.5 157.2 300.2" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table41" points="141.6 326.9 129.7 326.9 130.1 304.1 142 304.1 141.6 326.9" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table42" points="157.2 326.9 145.2 326.9 145.6 304.1 157.6 304.1 157.2 326.9" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table43" points="218.2 273.1 206.3 273.1 206.7 250.4 218.6 250.4 218.2 273.1" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table44" points="233.8 273.1 221.8 273.1 222.2 250.4 234.2 250.4 233.8 273.1" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table45" points="218.2 335.3 206.3 335.3 206.7 312.6 218.6 312.6 218.2 335.3" onclick="reserve(this);"/>
+			<polygon class="notReservable" id="table46" points="233.8 335.3 221.8 335.3 222.2 312.6 234.2 312.6 233.8 335.3" onclick="reserve(this);"/>
+		</g></svg>
+	</body>
+</html>

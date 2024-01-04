@@ -1,0 +1,20 @@
+.wall {
+    fill: none;
+    stroke: #211915;
+    stroke-miterlimit: 10;
+}
+.door {
+    fill: none;
+    stroke: #211915;
+    stroke-miterlimit: 10;
+}
+.reservedTable {
+    fill: #ff0000;
+
+}
+.freeTable{
+    fill: #00ff00;
+}
+.notReservable {
+    fill: lightgrey;
+}
