@@ -36,8 +36,12 @@ public class User {
         return id;
     }
 
+    public void setName(String name) { this.userName = name; }
+
     public void setPassword(String password) {
         if(LogInController.verifyPassword(password))
             this.password = password;
     }
+
+
 }
