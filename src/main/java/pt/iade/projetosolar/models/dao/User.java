@@ -2,6 +2,7 @@ package pt.iade.projetosolar.models.dao;
 
 import jakarta.persistence.*;
 import org.springframework.data.repository.CrudRepository;
+import pt.iade.projetosolar.controllers.LogInController;
 
 import java.sql.Date;
 
@@ -24,4 +25,19 @@ public class User {
         this.isActive = true;
     }
 
+    public User(String userName, String email, String password, String phone, Date bDate) {
+        this.creationDate = new Date(System.currentTimeMillis());
+        this.isActive = true;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setPassword(String password) {
+        if(LogInController.verifyPassword(password))
+            this.password = password;
+    }
 }

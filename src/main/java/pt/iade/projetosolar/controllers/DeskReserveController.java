@@ -10,18 +10,28 @@ import pt.iade.projetosolar.models.dao.WorkStationsGroup;
 import pt.iade.projetosolar.models.dao.WorkStationsSpace;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class DeskReserveMap {
+public class DeskReserveController {
 
     private final WorkStationsSpaceRepository spaces;
 
-    public DeskReserveMap(WorkStationsSpaceRepository spaces) {
+    public DeskReserveController(WorkStationsSpaceRepository spaces) {
         this.spaces = spaces;
     }
 
-    public Document CheckReservedTables(Document dom) {
+    public Document getFloorPlanHTML(int spaceId) {
+        WorkStationsSpace space = spaces.findById(spaceId).get();
+        Document dom = getDOM(spaceId);
+        Document finalFloorPlan = CheckReservedTables(dom);
+        return finalFloorPlan;
+    }
+
+
+
+    private Document CheckReservedTables(Document dom) {
         Iterable<WorkStationsSpace> spaceList = spaces.findAll();
         for (WorkStationsSpace space : spaceList) {
             List<WorkStationsGroup> tableGroups = space.getTableGroups();
@@ -44,7 +54,7 @@ public class DeskReserveMap {
         return dom;
     }
 
-    public Document getDOM(int spaceId) {
+    private Document getDOM(int spaceId) {
         File html = new File("src/main/resources/static/floorplans/" + spaceId + ".html");
 
         Document doc = null;
@@ -60,7 +70,7 @@ public class DeskReserveMap {
         return doc;
     }
 
-    public Document getStyleSheet() {
+    private Document getStyleSheet() {
         File css = new File("src/main/resources/static/floorplans/floorPlanStyle.css");
 
         Document doc = null;
@@ -72,4 +82,20 @@ public class DeskReserveMap {
 
         return doc;
     }
+
+    public int getOccupancyRate(int spaceId) {
+        WorkStationsSpace space = spaces.findById(spaceId).get();
+        ArrayList<WorkStation> tables = space.getTables();
+
+        int totalTables = tables.size();
+        int reservedTables = 0;
+        for (WorkStation table : tables) {
+            if (table.isReserved())
+                reservedTables++;
+        }
+
+        return reservedTables / totalTables;
+    }
+
+
 }

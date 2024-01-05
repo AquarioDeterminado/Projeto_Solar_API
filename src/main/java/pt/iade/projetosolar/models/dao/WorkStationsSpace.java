@@ -1,11 +1,6 @@
 package pt.iade.projetosolar.models.dao;
 
 import jakarta.persistence.*;
-import org.w3c.dom.Document;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,4 +23,12 @@ public class WorkStationsSpace {
 
     public List<WorkStationsGroup> getTableGroups() { return groups; }
 
+    public ArrayList<WorkStation> getTables() {
+        ArrayList<WorkStation> tables = new ArrayList<>();
+
+        for (WorkStationsGroup group : groups) {
+            tables.addAll(group.getTables());
+        }
+        return tables;
+    }
 }
