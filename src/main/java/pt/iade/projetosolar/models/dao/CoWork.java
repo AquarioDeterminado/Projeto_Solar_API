@@ -1,12 +1,6 @@
 package pt.iade.projetosolar.models.dao;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.beans.factory.annotation.Autowired;
-import pt.iade.projetosolar.controllers.repositories.WorkStationsSpaceRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +29,15 @@ public class CoWork {
     @OneToMany(mappedBy = "coworkSpace", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WorkStationsSpace> coworkSpaces = new ArrayList<>();
 
+    @OneToMany(mappedBy = "coworkSpace", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Event> events = new ArrayList<>();
+
     public WorkStationsSpace getSpace(int spaceId) {
         for (WorkStationsSpace coworkSpace : coworkSpaces)
             if (coworkSpace.getId() == spaceId)
                 return coworkSpace;
         return null;
     }
+
+    public List<Event> getEvents() { return events; }
 }
