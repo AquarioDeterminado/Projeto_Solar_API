@@ -1,10 +1,7 @@
 package pt.iade.projetosolar.controllers;
 
 import pt.iade.projetosolar.controllers.repositories.EventRepository;
-import pt.iade.projetosolar.models.dao.CoWork;
-import pt.iade.projetosolar.models.dao.Event;
-import pt.iade.projetosolar.models.dao.Subscription;
-import pt.iade.projetosolar.models.dao.User;
+import pt.iade.projetosolar.models.dao.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,18 +37,21 @@ public class EventController {
         ArrayList<Event> subEvents = getSubbedCoworkEvents(user);
         ArrayList<Event> publicEvents = getPublicEvents();
 
-        availableEvents.addAll(publicEvents);
         availableEvents.addAll(subEvents);
-
+        for (Event event : publicEvents) {
+            if (!availableEvents.contains(event)) {
+                availableEvents.add(event);
+            }
+        }
         return availableEvents.toArray(new Event[0]);
     }
 
     private ArrayList<Event> getSubbedCoworkEvents(User user) {
-        List<Subscription> subscriptions = user.client().getSubscriptions();
+        List<SubscriptionRecord> subscriptions = user.getSubscriptions();
 
         CoWork coWork = null;
-        ArrayList<Event> subEvents = null;
-        for(Subscription subscription : subscriptions) {
+        ArrayList<Event> subEvents = new ArrayList<>();
+        for(SubscriptionRecord subscription : subscriptions) {
             coWork = subscription.getCoWork();
             subEvents.addAll(coWork.getEvents());
         }
@@ -60,7 +60,7 @@ public class EventController {
 
     private ArrayList<Event> getPublicEvents() {
         ArrayList<Event> publicEvents = new ArrayList<>();
-        publicEvents = eventRepository.findAllWherePublicIsTrue();
+        publicEvents = eventRepository.findByIsPublicIs(true);
         return publicEvents;
     }
 

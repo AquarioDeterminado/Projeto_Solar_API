@@ -11,16 +11,15 @@ public class Client {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "cli_id")
     private int id;
 
-    @OneToOne(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cli_ent_id", referencedColumnName = "ent_id")
+    private EntityDBO entityDBO;
 
-    @ManyToMany
-    @JoinTable(name = "subscriptions",
-            joinColumns = @JoinColumn(name = "sus_cli_id"),
-            inverseJoinColumns = @JoinColumn(name = "sus_sub_id"))
-    private List<Subscription> subscriptions = new ArrayList<>();
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<SubscriptionRecord> subscriptions = new ArrayList<>();
 
-    public List<Subscription> getSubscriptions() {return subscriptions;}
+    public List<SubscriptionRecord> getSubscriptions() {return subscriptions;}
 }

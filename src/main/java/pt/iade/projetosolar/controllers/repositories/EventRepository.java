@@ -6,6 +6,5 @@ import pt.iade.projetosolar.models.dao.Event;
 import java.util.ArrayList;
 
 public interface EventRepository extends CrudRepository<Event, Integer> {
-
-    ArrayList<Event> findAllWherePublicIsTrue();
+    ArrayList<Event> findByIsPublicIs(boolean isPublic);
 }

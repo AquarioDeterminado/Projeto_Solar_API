@@ -12,7 +12,6 @@ public class Event {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "evt_id") private int id;
-
     @Column(name = "evt_name") private String name;
     @Column(name = "evt_description") private String description;
     @Column(name = "evt_location") private String location;
@@ -22,11 +21,12 @@ public class Event {
     @Column(name = "evt_min_capacity") private int minParticipants;
     @Column(name = "evt_was_canceled") private boolean wasCanceled;
     @Column(name = "evt_create") private Date creationDate;
+    @Column(name = "evt_is_public") private boolean isPublic;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<RSPV> rsvps;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "evt_space_id")
     private CoWork coWork;
 

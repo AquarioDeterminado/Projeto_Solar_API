@@ -18,13 +18,13 @@ public class EventsInfo {
     @Autowired
     private EventRepository eventsRepository;
 
-    @GetMapping(path = "/getRSVP", produces= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/getRSVP", produces= MediaType.APPLICATION_JSON_VALUE)
     public Event[] getUserRSVP(@RequestBody int userId){
         User user = userRepository.findById(userId).get();
         return user.getEvents().toArray(new Event[0]);
     }
 
-    @GetMapping(path = "/getAvailableEvents", produces= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/getAvailableEvents", produces= MediaType.APPLICATION_JSON_VALUE)
     public Event[] getAvailableEvents(@RequestBody int userId){
         EventController eventController = new EventController(eventsRepository);
         User user = userRepository.findById(userId).get();

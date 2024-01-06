@@ -12,7 +12,6 @@ public class User {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "ind_id") private int id;
-    @Column(name = "ind_ent_id") private int ent_id;
     @Column(name = "ind_email") private String email;
     @Column(name = "ind_password") private String password;
     @Column(name = "ind_name") private String userName;
@@ -25,7 +24,7 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ind_ent_id")
-    private Client client;
+    private EntityDBO entityDBO;
 
     public User() {
         this.creationDate = new Date(System.currentTimeMillis());
@@ -74,5 +73,11 @@ public class User {
         }
     }
 
-    public Client client() { return client; }
+    public List<SubscriptionRecord> getSubscriptions() {
+        List<SubscriptionRecord> subscriptions = new ArrayList<>();
+        Client client = this.entityDBO.getClient();
+        if (client != null)
+            subscriptions = client.getSubscriptions();
+        return subscriptions;
+    }
 }

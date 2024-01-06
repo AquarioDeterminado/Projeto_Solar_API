@@ -14,7 +14,7 @@ public class CoWork {
 
     @Column (name = "spc_name") private String name;
 
-    @Column (name = "spc_locations") private String location;
+    @Column (name = "spc_location") private String location;
 
     @Column (name = "spc_max_capacity") private int maxCapacity;
 
@@ -29,7 +29,7 @@ public class CoWork {
     @OneToMany(mappedBy = "coworkSpace", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WorkStationsSpace> coworkSpaces = new ArrayList<>();
 
-    @OneToMany(mappedBy = "coworkSpace", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "coWork", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Event> events = new ArrayList<>();
 
     public WorkStationsSpace getSpace(int spaceId) {
