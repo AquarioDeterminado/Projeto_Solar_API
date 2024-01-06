@@ -1,4 +1,4 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.users;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;

@@ -1,7 +1,11 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.users;
 
 import jakarta.persistence.*;
 import pt.iade.projetosolar.controllers.LogInController;
+import pt.iade.projetosolar.models.dao.events.Event;
+import pt.iade.projetosolar.models.dao.events.RSPV;
+import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;

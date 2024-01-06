@@ -1,6 +1,7 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.workstations;
 
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.users.User;
 
 import java.sql.Date;
 

@@ -1,6 +1,10 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.subscriptions;
 
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.coworks.CoWork;
+import pt.iade.projetosolar.models.dao.utils.Facility;
+
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "subscription")
@@ -18,6 +22,12 @@ public class Subscription {
     @JoinColumn(name = "sub_spc_id")
     private CoWork coWork;
 
+    @ManyToMany
+    @JoinTable(name = "subscriptions_facilities",
+        joinColumns = @JoinColumn(name = "suf_sub_id"),
+        inverseJoinColumns = @JoinColumn(name = "suf_fac_id"))
+    private ArrayList<Facility> facilities;
+
     public int getId() {return id;}
 
     public String getName() {return name;}
@@ -25,4 +35,6 @@ public class Subscription {
     public String getPrice() {return price;}
 
     public CoWork getCoWork() {return coWork;}
+
+    public ArrayList<Facility> getFacilities() {return facilities;}
 }

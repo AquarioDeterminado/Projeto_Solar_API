@@ -1,13 +1,7 @@
 package pt.iade.projetosolar.views;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pt.iade.projetosolar.controllers.repositories.CoWorkRepository;
-import pt.iade.projetosolar.models.dao.CoWork;
-import pt.iade.projetosolar.models.dao.WorkStationsSpace;
-
-import java.util.Optional;
 
 @RequestMapping(path = "/Solar/coworkspaces")
 @RestController

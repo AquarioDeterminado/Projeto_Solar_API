@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import pt.iade.projetosolar.controllers.EventController;
 import pt.iade.projetosolar.controllers.repositories.EventRepository;
 import pt.iade.projetosolar.controllers.repositories.UserRepository;
-import pt.iade.projetosolar.models.dao.Event;
-import pt.iade.projetosolar.models.dao.User;
+import pt.iade.projetosolar.models.dao.events.Event;
+import pt.iade.projetosolar.models.dao.users.User;
 
 @RestController
 @RequestMapping(path="/Solar/events")

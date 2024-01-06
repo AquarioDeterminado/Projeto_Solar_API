@@ -1,6 +1,7 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.users;
 
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
 
 import java.util.ArrayList;
 import java.util.List;

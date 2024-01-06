@@ -1,4 +1,4 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.workstations;
 
 import jakarta.persistence.*;
 

@@ -1,7 +1,10 @@
 package pt.iade.projetosolar.controllers;
 
 import pt.iade.projetosolar.controllers.repositories.EventRepository;
-import pt.iade.projetosolar.models.dao.*;
+import pt.iade.projetosolar.models.dao.coworks.CoWork;
+import pt.iade.projetosolar.models.dao.events.Event;
+import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
+import pt.iade.projetosolar.models.dao.users.User;
 
 import java.util.ArrayList;
 import java.util.List;

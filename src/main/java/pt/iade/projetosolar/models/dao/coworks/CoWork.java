@@ -1,6 +1,10 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.coworks;
 
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.events.Event;
+import pt.iade.projetosolar.models.dao.utils.Facility;
+import pt.iade.projetosolar.models.dao.workstations.WorkStationsSpace;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +36,12 @@ public class CoWork {
     @OneToMany(mappedBy = "coWork", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Event> events = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "coworkSpaces", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "cowork_spaces_facilities",
+            joinColumns = @JoinColumn(name = "cof_spc_id"),
+            inverseJoinColumns = @JoinColumn(name = "cof_fac_id"))
+    private ArrayList<Facility> facilities = new ArrayList<>();
+
     public WorkStationsSpace getSpace(int spaceId) {
         for (WorkStationsSpace coworkSpace : coworkSpaces)
             if (coworkSpace.getId() == spaceId)
@@ -40,4 +50,6 @@ public class CoWork {
     }
 
     public List<Event> getEvents() { return events; }
+
+    public List<Facility> getFacilities() {return facilities;}
 }

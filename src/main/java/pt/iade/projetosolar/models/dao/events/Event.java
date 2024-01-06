@@ -1,7 +1,10 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.events;
 
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.coworks.CoWork;
+import pt.iade.projetosolar.models.dao.utils.Facility;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +33,19 @@ public class Event {
     @JoinColumn(name = "evt_space_id")
     private CoWork coWork;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "events_facilities",
+            joinColumns = @JoinColumn(name = "evf_evt_id"),
+            inverseJoinColumns = @JoinColumn(name = "evf_fac_id"))
+    private List<Facility> facilities = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private EventType type;
+
     public Event() {
         this.creationDate = new Date(System.currentTimeMillis());
         this.wasCanceled = false;
     }
 
-
+    public List<Facility> getFacilities() {return facilities;}
 }

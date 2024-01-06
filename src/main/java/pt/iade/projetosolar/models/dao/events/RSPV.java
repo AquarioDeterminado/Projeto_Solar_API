@@ -1,6 +1,8 @@
-package pt.iade.projetosolar.models.dao;
+package pt.iade.projetosolar.models.dao.events;
 
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.events.Event;
+import pt.iade.projetosolar.models.dao.users.User;
 
 @Entity
 @Table(name = "rsvp")
