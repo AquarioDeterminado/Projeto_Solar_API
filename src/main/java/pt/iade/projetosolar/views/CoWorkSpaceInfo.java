@@ -7,6 +7,7 @@ import pt.iade.projetosolar.controllers.repositories.CoWorkRepository;
 import pt.iade.projetosolar.controllers.repositories.UserRepository;
 import pt.iade.projetosolar.models.dao.coworks.CoWork;
 import pt.iade.projetosolar.models.exportInfo.CoworkInfo;
+import pt.iade.projetosolar.models.importInfo.UserId;
 
 import java.util.ArrayList;
 
@@ -23,12 +24,14 @@ public class CoWorkSpaceInfo {
     }
 
     @PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<CoWorkSpaceInfo> getCoworkSpaces(@RequestBody int userId) {
-        ArrayList<CoWorkSpaceInfo> coWorks = new ArrayList<>();
+    public ArrayList<CoworkInfo> getCoworkSpaces(@RequestBody UserId userId) {
+        ArrayList<CoworkInfo> coWorks = new ArrayList<>();
         CoworkController coworkController = new CoworkController(coWorkSpaceRepository, userRepository);
 
-        ArrayList<CoWork> nearCoWorks = coworkController.getNearCoWorks(userId);
-        coworks = CoworkInfo.getCoWorkInfo(nearCoWorks);
+        ArrayList<CoWork> nearCoWorks = coworkController.getNearCoWorks(userId.id());
+        coWorks = CoworkInfo.getCoWorkInfo(nearCoWorks);
+
+        return coWorks;
     }
 
 }

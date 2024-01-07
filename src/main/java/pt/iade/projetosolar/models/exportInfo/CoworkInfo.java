@@ -11,7 +11,7 @@ public class CoworkInfo {
     private String name;
     private static Image logo;
 
-    public CoworkInfo(String id, String name)
+    public CoworkInfo(int id, String name)
     {
         this.id = id;
         this.name = name;

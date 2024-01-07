@@ -13,7 +13,7 @@ import pt.iade.projetosolar.models.importInfo.UserId;
 
 import java.util.ArrayList;
 
-@RequestMapping(path="/")
+@RequestMapping(path="/events")
 @RestController
 public class EventsInfo {
 
@@ -22,7 +22,7 @@ public class EventsInfo {
     @Autowired
     private EventRepository eventsRepository;
 
-    @PostMapping(path = "/getRSVP", produces= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/getUserEvents", produces= MediaType.APPLICATION_JSON_VALUE)
     public Event[] getUserRSVP(@RequestBody int userId){
         User user = userRepository.findById(userId).get();
         return user.getEvents().toArray(new Event[0]);
