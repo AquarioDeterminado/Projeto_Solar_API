@@ -6,6 +6,7 @@ import pt.iade.projetosolar.models.dao.events.Event;
 import pt.iade.projetosolar.models.dao.events.RSPV;
 import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
 import pt.iade.projetosolar.models.dao.subscriptions.Susbcribed;
+import pt.iade.projetosolar.models.dao.workstations.WorkStationsSpace;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -88,5 +89,20 @@ public class User {
         for (Susbcribed s : subscribedGroups)
             subscriptions.add(s.getSubscriptionRecord());
         return subscriptions;
+    }
+
+    public ArrayList<WorkStationsSpace> getAcessibleSpaces() {
+        ArrayList<WorkStationsSpace> spaces = new ArrayList<>();
+
+        List<SubscriptionRecord> subscriptions = getSubscriptions();
+
+        List<WorkStationsSpace> coworkSpaces = new ArrayList<>();
+        for (SubscriptionRecord s : subscriptions) {
+            coworkSpaces = s.getCoWork().getCoworkSpaces();
+            if (!coworkSpaces.isEmpty())
+                spaces.addAll(coworkSpaces);
+
+        }
+
     }
 }
