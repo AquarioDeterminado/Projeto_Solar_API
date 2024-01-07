@@ -12,6 +12,7 @@ import pt.iade.projetosolar.models.exportInfo.EventInfo;
 import pt.iade.projetosolar.models.importInfo.UserId;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping(path="/events")
 @RestController
@@ -23,9 +24,11 @@ public class EventsInfo {
     private EventRepository eventsRepository;
 
     @PostMapping(path = "/getUserEvents", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Event[] getUserRSVP(@RequestBody int userId){
+    public EventInfo[] getUserRSVP(@RequestBody int userId){
         User user = userRepository.findById(userId).get();
-        return user.getEvents().toArray(new Event[0]);
+        List<Event> events = user.getEvents();
+        List<EventInfo> eventsInfo = EventInfo.getEventsInfo(events);
+        return eventsInfo.toArray(new EventInfo[0]);
     }
 
     @PostMapping(path = "/getAvailableEvents", produces= MediaType.APPLICATION_JSON_VALUE)

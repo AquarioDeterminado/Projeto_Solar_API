@@ -43,6 +43,10 @@ public class User {
         this.password = password;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
     public int getId() {
         return id;
     }
@@ -80,8 +84,7 @@ public class User {
 
     public List<SubscriptionRecord> getSubscriptions() {
         List<SubscriptionRecord> subscriptions = new ArrayList<>();
-        List<Susbcribed> subscribedGroups = new ArrayList<>();
-        subscribedGroups = entityDBO.getSubscribedGroups();
+        List<Susbcribed> subscribedGroups = entityDBO.getSubscribedGroups();
         for (Susbcribed s : subscribedGroups)
             subscriptions.add(s.getSubscriptionRecord());
         return subscriptions;

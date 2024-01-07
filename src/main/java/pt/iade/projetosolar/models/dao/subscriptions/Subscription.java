@@ -2,7 +2,6 @@ package pt.iade.projetosolar.models.dao.subscriptions;
 
 import jakarta.persistence.*;
 import pt.iade.projetosolar.models.dao.coworks.CoWork;
-import pt.iade.projetosolar.models.dao.utils.Facility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class Subscription {
 
     @Column(name = "sub_name") private String name;
 
-    @Column(name = "sub_price") private String price;
+    @Column(name = "sub_price") private double price;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_spc_id")
@@ -30,7 +29,7 @@ public class Subscription {
 
     public String getName() {return name;}
 
-    public String getPrice() {return price;}
+    public double getPrice() {return price;}
 
     public CoWork getCoWork() {return coWork;}
 

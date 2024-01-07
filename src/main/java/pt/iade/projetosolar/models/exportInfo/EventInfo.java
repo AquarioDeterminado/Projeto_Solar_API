@@ -3,7 +3,9 @@ package pt.iade.projetosolar.models.exportInfo;
 import pt.iade.projetosolar.models.dao.events.Event;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class EventInfo implements Serializable {
 
@@ -27,7 +29,13 @@ public class EventInfo implements Serializable {
         this.reachedMin = event.reachedMinGoal() ? 1 : 0;
     }
 
-    public EventInfo(){}
+    public static ArrayList<EventInfo> getEventsInfo(List<Event> events){
+        ArrayList<EventInfo> eventInfos = new ArrayList<>();
+        for (Event event : events) {
+            eventInfos.add(new EventInfo(event));
+        }
+        return eventInfos;
+    }
 
     public int getId() {
         return id;

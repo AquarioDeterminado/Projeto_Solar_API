@@ -11,10 +11,11 @@ public class CoworkInfo {
     private String name;
     private static Image logo;
 
-    public CoworkInfo(int id, String name)
+    public CoworkInfo(CoWork coWork)
     {
-        this.id = id;
-        this.name = name;
+        this.id = coWork.getId();
+        this.name = coWork.getName();
+        //this.logo = coWork.getLogo(); TODO
     }
 
     public static Image getLogo() {
@@ -28,7 +29,7 @@ public class CoworkInfo {
     public static ArrayList<CoworkInfo> getCoWorkInfo(ArrayList<CoWork> nearCoWorks) {
         ArrayList<CoworkInfo> coworks = new ArrayList<>();
         for (CoWork cowork : nearCoWorks) {
-            coworks.add(new CoworkInfo(cowork.getId(), cowork.getName()));
+            coworks.add(new CoworkInfo(cowork));
         }
         return coworks;
     }
