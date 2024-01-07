@@ -1,20 +1,34 @@
 package pt.iade.projetosolar.views;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import pt.iade.projetosolar.controllers.CoworkController;
 import pt.iade.projetosolar.controllers.repositories.CoWorkRepository;
+import pt.iade.projetosolar.controllers.repositories.UserRepository;
+import pt.iade.projetosolar.models.dao.coworks.CoWork;
+import pt.iade.projetosolar.models.exportInfo.CoworkInfo;
 
-@RequestMapping(path = "/Solar/coworkspaces")
+import java.util.ArrayList;
+
+@RequestMapping(path = "/coworkspaces")
 @RestController
 public class CoWorkSpaceInfo {
 
     private final CoWorkRepository coWorkSpaceRepository;
+    private final UserRepository userRepository;
 
-    public CoWorkSpaceInfo(CoWorkRepository coWorkSpaceRepository) {
+    public CoWorkSpaceInfo(CoWorkRepository coWorkSpaceRepository, UserRepository userRepository) {
         this.coWorkSpaceRepository = coWorkSpaceRepository;
+        this.userRepository = userRepository;
     }
 
-    public static class getFloorPlan {
-        public String coWorkId;
-        public String spaceId;
+    @PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<CoWorkSpaceInfo> getCoworkSpaces(@RequestBody int userId) {
+        ArrayList<CoWorkSpaceInfo> coWorks = new ArrayList<>();
+        CoworkController coworkController = new CoworkController(coWorkSpaceRepository, userRepository);
+
+        ArrayList<CoWork> nearCoWorks = coworkController.getNearCoWorks(userId);
+        coworks = CoworkInfo.getCoWorkInfo(nearCoWorks);
     }
+
 }

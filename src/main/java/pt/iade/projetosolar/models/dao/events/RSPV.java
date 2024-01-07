@@ -20,7 +20,7 @@ public class RSPV {
     @JoinColumn(name = "rsvp_evt_id")
     Event event;
 
-    @Column(name = "rsvp_is_goin") private boolean userIsGoing;
+    @Column(name = "rsvp_is_going") private boolean userIsGoing;
 
     @Column(name = "rsvp_wants_notification") private boolean userWantsNotification;
 

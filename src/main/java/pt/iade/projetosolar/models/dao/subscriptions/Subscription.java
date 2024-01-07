@@ -5,6 +5,7 @@ import pt.iade.projetosolar.models.dao.coworks.CoWork;
 import pt.iade.projetosolar.models.dao.utils.Facility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "subscription")
@@ -22,11 +23,8 @@ public class Subscription {
     @JoinColumn(name = "sub_spc_id")
     private CoWork coWork;
 
-    @ManyToMany
-    @JoinTable(name = "subscriptions_facilities",
-        joinColumns = @JoinColumn(name = "suf_sub_id"),
-        inverseJoinColumns = @JoinColumn(name = "suf_fac_id"))
-    private ArrayList<Facility> facilities;
+    @OneToMany(mappedBy = "subscription")
+    private List<SubscriptionFacilities> facilities = new ArrayList<>();
 
     public int getId() {return id;}
 
@@ -36,5 +34,5 @@ public class Subscription {
 
     public CoWork getCoWork() {return coWork;}
 
-    public ArrayList<Facility> getFacilities() {return facilities;}
+    public List<SubscriptionFacilities> getFacilities() {return facilities;}
 }

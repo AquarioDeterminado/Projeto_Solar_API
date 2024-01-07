@@ -5,6 +5,7 @@ import pt.iade.projetosolar.controllers.LogInController;
 import pt.iade.projetosolar.models.dao.events.Event;
 import pt.iade.projetosolar.models.dao.events.RSPV;
 import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
+import pt.iade.projetosolar.models.dao.subscriptions.Susbcribed;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -79,9 +80,10 @@ public class User {
 
     public List<SubscriptionRecord> getSubscriptions() {
         List<SubscriptionRecord> subscriptions = new ArrayList<>();
-        Client client = this.entityDBO.getClient();
-        if (client != null)
-            subscriptions = client.getSubscriptions();
+        List<Susbcribed> subscribedGroups = new ArrayList<>();
+        subscribedGroups = entityDBO.getSubscribedGroups();
+        for (Susbcribed s : subscribedGroups)
+            subscriptions.add(s.getSubscriptionRecord());
         return subscriptions;
     }
 }

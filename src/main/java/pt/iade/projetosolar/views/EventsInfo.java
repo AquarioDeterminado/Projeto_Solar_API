@@ -8,9 +8,13 @@ import pt.iade.projetosolar.controllers.repositories.EventRepository;
 import pt.iade.projetosolar.controllers.repositories.UserRepository;
 import pt.iade.projetosolar.models.dao.events.Event;
 import pt.iade.projetosolar.models.dao.users.User;
+import pt.iade.projetosolar.models.exportInfo.EventInfo;
+import pt.iade.projetosolar.models.importInfo.UserId;
 
+import java.util.ArrayList;
+
+@RequestMapping(path="/")
 @RestController
-@RequestMapping(path="/Solar/events")
 public class EventsInfo {
 
     @Autowired
@@ -25,30 +29,47 @@ public class EventsInfo {
     }
 
     @PostMapping(path = "/getAvailableEvents", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Event[] getAvailableEvents(@RequestBody int userId){
+    public ArrayList<EventInfo> getAvailableEvents(@RequestBody UserId userId){
         EventController eventController = new EventController(eventsRepository);
-        User user = userRepository.findById(userId).get();
-        return eventController.getUserAvailableEvents(user);
+        User user = userRepository.findById(userId.id()).get();
+        ArrayList<Event> events = eventController.getUserAvailableEvents(user);
+        ArrayList<EventInfo> eventsInfo = new ArrayList<>();
+        for(Event event : events)
+            eventsInfo.add(new EventInfo(event));
+
+        return eventsInfo;
     }
 
     @PostMapping(path = "/attendEvent", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Event attendEvent(@RequestBody int userId, int eventId){
+    public EventInfo attendEvent(@RequestBody int userId, int eventId){
         EventController eventController = new EventController(eventsRepository);
         User user = userRepository.findById(userId).get();
-        return eventController.attendEvent(user, eventId);
+        Event event = eventController.attendEvent(user, eventId);
+        if(event != null)
+            return new EventInfo(event);
+        else
+            return null;
     }
 
     @PostMapping(path = "/cancelEvent", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Event cancelEvent(@RequestBody int userId, int eventId){
+    public EventInfo cancelEvent(@RequestBody int userId, int eventId){
         EventController eventController = new EventController(eventsRepository);
         User user = userRepository.findById(userId).get();
-        return eventController.removeRSVP(user, eventId);
+        Event event = eventController.removeRSVP(user, eventId);
+        if(event != null)
+            return new EventInfo(event);
+        else
+            return null;
     }
 
     @PostMapping(path = "/setNotifyUser", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Event setNotifyUser(@RequestBody int userId, int eventId){
+    public EventInfo setNotifyUser(@RequestBody int userId, int eventId){
         EventController eventController = new EventController(eventsRepository);
         User user = userRepository.findById(userId).get();
-        return eventController.setNotifyUser(user, eventId);
+        Event event = eventController.setNotifyUser(user, eventId);
+        if(event != null)
+            return new EventInfo(event);
+        else
+            return null;
     }
 }

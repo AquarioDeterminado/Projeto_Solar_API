@@ -30,17 +30,14 @@ public class CoWork {
 
     @Column (name = "spc_active") private boolean isActive;
 
-    @OneToMany(mappedBy = "coworkSpace", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "coWork", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WorkStationsSpace> coworkSpaces = new ArrayList<>();
 
     @OneToMany(mappedBy = "coWork", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Event> events = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "coworkSpaces", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "cowork_spaces_facilities",
-            joinColumns = @JoinColumn(name = "cof_spc_id"),
-            inverseJoinColumns = @JoinColumn(name = "cof_fac_id"))
-    private ArrayList<Facility> facilities = new ArrayList<>();
+    @OneToMany(mappedBy = "coWork", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CoWorksFacilities> facilities = new ArrayList<>();
 
     public WorkStationsSpace getSpace(int spaceId) {
         for (WorkStationsSpace coworkSpace : coworkSpaces)
@@ -51,5 +48,37 @@ public class CoWork {
 
     public List<Event> getEvents() { return events; }
 
-    public List<Facility> getFacilities() {return facilities;}
+    public List<CoWorksFacilities> getFacilities() {return facilities;}
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public String getWebSite() {
+        return webSite;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public List<WorkStationsSpace> getCoworkSpaces() {
+        return coworkSpaces;
+    }
+
+    public int getId() {return id;}
+
+    public String getName() {return name;}
 }

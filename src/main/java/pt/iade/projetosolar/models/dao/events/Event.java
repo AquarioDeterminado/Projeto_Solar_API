@@ -18,8 +18,8 @@ public class Event {
     @Column(name = "evt_name") private String name;
     @Column(name = "evt_description") private String description;
     @Column(name = "evt_location") private String location;
-    @Column(name = "evt_start") private String start;
-    @Column(name = "evt_finish") private String end;
+    @Column(name = "evt_start") private Date start;
+    @Column(name = "evt_finish") private Date end;
     @Column(name = "evt_max_capacity") private int maxParticipants;
     @Column(name = "evt_min_capacity") private int minParticipants;
     @Column(name = "evt_was_canceled") private boolean wasCanceled;
@@ -33,13 +33,11 @@ public class Event {
     @JoinColumn(name = "evt_space_id")
     private CoWork coWork;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "events_facilities",
-            joinColumns = @JoinColumn(name = "evf_evt_id"),
-            inverseJoinColumns = @JoinColumn(name = "evf_fac_id"))
-    private List<Facility> facilities = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<EventsFacilities> facilities = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "evt_ety_id", referencedColumnName = "ety_id")
     private EventType type;
 
     public Event() {
@@ -47,5 +45,43 @@ public class Event {
         this.wasCanceled = false;
     }
 
-    public List<Facility> getFacilities() {return facilities;}
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public boolean isFull() {
+        int rsvpsCount = rsvps.size();
+        return rsvpsCount >= maxParticipants;
+    }
+
+    public boolean reachedMinGoal() {
+        int rsvpsCount = rsvps.size();
+        return rsvpsCount >= minParticipants;
+    }
+
+    public List<EventsFacilities> getFacilities() {return facilities;}
 }

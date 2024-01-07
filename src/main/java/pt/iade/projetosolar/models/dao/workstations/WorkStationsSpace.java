@@ -16,7 +16,7 @@ public class WorkStationsSpace {
 
     @ManyToOne
     @JoinColumn(name = "wsp_spc_id")
-    private CoWork coworkSpace;
+    private CoWork coWork;
 
     @OneToMany(mappedBy = "workStationsSpace", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<WorkStationsGroup> groups = new ArrayList<>();

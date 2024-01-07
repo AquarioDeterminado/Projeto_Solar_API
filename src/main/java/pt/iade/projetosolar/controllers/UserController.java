@@ -1,6 +1,7 @@
 package pt.iade.projetosolar.controllers;
 
 import pt.iade.projetosolar.controllers.repositories.UserRepository;
+import pt.iade.projetosolar.models.dao.users.User;
 
 public class UserController {
 

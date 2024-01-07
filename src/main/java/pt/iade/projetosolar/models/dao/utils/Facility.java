@@ -2,8 +2,11 @@ package pt.iade.projetosolar.models.dao.utils;
 
 import jakarta.persistence.*;
 import pt.iade.projetosolar.models.dao.coworks.CoWork;
+import pt.iade.projetosolar.models.dao.coworks.CoWorksFacilities;
 import pt.iade.projetosolar.models.dao.events.Event;
+import pt.iade.projetosolar.models.dao.events.EventsFacilities;
 import pt.iade.projetosolar.models.dao.subscriptions.Subscription;
+import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionFacilities;
 
 import java.util.ArrayList;
 
@@ -19,14 +22,14 @@ public class Facility {
     @Column(name = "fac_name")
     private String name;
 
-    @ManyToMany(mappedBy = "facilities")
-    private ArrayList<CoWork> coWorks;
+    @OneToMany(mappedBy = "facility")
+    private ArrayList<CoWorksFacilities> coWorksFacilities = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "facilities")
-    private ArrayList<Event> events;
+    @OneToMany(mappedBy = "facility")
+    private ArrayList<EventsFacilities> eventsFacilities = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "facilities")
-    private ArrayList<Subscription> subscriptions;
+    @OneToMany(mappedBy = "facility")
+    private ArrayList<SubscriptionFacilities> subscriptions = new ArrayList<>();
 
     public String getName() {return name;}
 }

@@ -23,7 +23,5 @@ public class Susbcribed {
     @JoinColumn(name = "sud_ent_id")
     private EntityDBO entity;
 
-
-
-
+    public SubscriptionRecord getSubscriptionRecord() {return subscription;}
 }

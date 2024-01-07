@@ -17,9 +17,8 @@ public class EventType {
     @Column(name = "ety_type")
     private String type;
 
-    @OneToMany(mappedBy = "event_type", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "evt_ety_id", referencedColumnName = "ety_id")
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Event> event = new ArrayList<>();
 
-    public String getType() {return type;}
+    public String getName() {return type;}
 }

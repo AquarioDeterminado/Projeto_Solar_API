@@ -34,7 +34,7 @@ public class EventController {
         return event;
     }
 
-    public Event[] getUserAvailableEvents(User user) {
+    public ArrayList<Event> getUserAvailableEvents(User user) {
         ArrayList<Event> availableEvents = new ArrayList<>();
 
         ArrayList<Event> subEvents = getSubbedCoworkEvents(user);
@@ -46,7 +46,7 @@ public class EventController {
                 availableEvents.add(event);
             }
         }
-        return availableEvents.toArray(new Event[0]);
+        return availableEvents;
     }
 
     private ArrayList<Event> getSubbedCoworkEvents(User user) {

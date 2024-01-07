@@ -2,6 +2,10 @@ package pt.iade.projetosolar.models.dao.users;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.subscriptions.Susbcribed;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "entity")
@@ -19,6 +23,9 @@ public class EntityDBO {
     @OneToOne(mappedBy = "entityDBO")
     private User user;
 
+    @OneToMany(mappedBy = "entity")
+    private List<Susbcribed> subscribedGroups = new ArrayList<>();
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -33,4 +40,6 @@ public class EntityDBO {
     public Client getClient() {
         return client;
     }
+
+    public List<Susbcribed> getSubscribedGroups() {return subscribedGroups;}
 }
