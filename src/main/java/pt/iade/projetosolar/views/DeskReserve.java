@@ -14,6 +14,7 @@ import pt.iade.projetosolar.models.dao.subscriptions.Subscription;
 import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
 import pt.iade.projetosolar.models.dao.users.User;
 import pt.iade.projetosolar.models.dao.workstations.WorkStationsSpace;
+import pt.iade.projetosolar.models.exportInfo.WorkStationsSpaceInfo;
 import pt.iade.projetosolar.models.importInfo.UserId;
 
 import java.util.ArrayList;
@@ -36,12 +37,13 @@ public class DeskReserve {
     }
 
     @GetMapping(path = "/showSpaceLayout/spaceslist", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getSpaces(@PathVariable UserId userId) {
+    public ArrayList<WorkStationsSpaceInfo> getSpaces(@PathVariable UserId userId) {
         User user = userRepository.findById(userId.id()).get();
 
         ArrayList<WorkStationsSpace> spaces = user.getAcessibleSpaces();
+        ArrayList<WorkStationsSpaceInfo> response = WorkStationsSpaceInfo.getInfo(spaces);
 
-        return deskReserveController.getFloorPlanJSON(spaceId);
+        return response;
     }
 
     @GetMapping(path = "/showSpaceLayout/{spaceId}", produces = MediaType.TEXT_HTML_VALUE)

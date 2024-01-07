@@ -18,14 +18,17 @@ import java.util.List;
 @RestController
 public class EventsInfo {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private EventRepository eventsRepository;
+    private final UserRepository userRepository;
+    private final EventRepository eventsRepository;
+
+    public EventsInfo(UserRepository userRepository, EventRepository eventsRepository) {
+        this.userRepository = userRepository;
+        this.eventsRepository = eventsRepository;
+    }
 
     @PostMapping(path = "/getUserEvents", produces= MediaType.APPLICATION_JSON_VALUE)
-    public EventInfo[] getUserRSVP(@RequestBody int userId){
-        User user = userRepository.findById(userId).get();
+    public EventInfo[] getUserRSVP(@RequestBody UserId userId){
+        User user = userRepository.findById(userId.id()).get();
         List<Event> events = user.getEvents();
         List<EventInfo> eventsInfo = EventInfo.getEventsInfo(events);
         return eventsInfo.toArray(new EventInfo[0]);

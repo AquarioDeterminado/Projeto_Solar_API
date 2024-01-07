@@ -23,6 +23,8 @@ public class WorkStationsSpace {
 
     public int getId() { return id; }
 
+    public CoWork getCoWork() { return coWork; }
+
     public List<WorkStationsGroup> getTableGroups() { return groups; }
 
     public ArrayList<WorkStation> getTables() {
