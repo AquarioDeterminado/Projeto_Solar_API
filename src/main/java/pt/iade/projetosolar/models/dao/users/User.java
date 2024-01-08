@@ -148,9 +148,9 @@ public class User {
         List<WorkStationsSpace> coworkSpaces = new ArrayList<>();
         for (SubscriptionRecord s : subscriptions) {
             coworkSpaces = s.getCoWork().getCoworkSpaces();
+            if (!coworkSpaces.isEmpty())
+                spaces.addAll(coworkSpaces);
         }
-        if (!coworkSpaces.isEmpty())
-            spaces.addAll(coworkSpaces);
 
         return spaces;
     }
