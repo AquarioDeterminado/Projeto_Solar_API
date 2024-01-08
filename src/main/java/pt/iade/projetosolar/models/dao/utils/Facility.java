@@ -1,5 +1,6 @@
 package pt.iade.projetosolar.models.dao.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import pt.iade.projetosolar.models.dao.coworks.CoWork;
 import pt.iade.projetosolar.models.dao.coworks.CoWorksFacilities;
@@ -22,14 +23,6 @@ public class Facility {
     @Column(name = "fac_name")
     private String name;
 
-    @OneToMany(mappedBy = "facility")
-    private ArrayList<CoWorksFacilities> coWorksFacilities = new ArrayList<>();
-
-    @OneToMany(mappedBy = "facility")
-    private ArrayList<EventsFacilities> eventsFacilities = new ArrayList<>();
-
-    @OneToMany(mappedBy = "facility")
-    private ArrayList<SubscriptionFacilities> subscriptions = new ArrayList<>();
 
     public String getName() {return name;}
 }

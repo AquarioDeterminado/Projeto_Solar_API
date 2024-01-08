@@ -20,4 +20,6 @@ public class CoWorksFacilities {
     @JoinColumn(name = "cof_fac_id")
     private Facility facility;
 
+    public Facility getFacility() {return facility;}
+
 }

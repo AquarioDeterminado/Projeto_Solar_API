@@ -1,6 +1,8 @@
 package pt.iade.projetosolar.models.exportInfo;
 
 import pt.iade.projetosolar.models.dao.coworks.CoWork;
+import pt.iade.projetosolar.models.dao.coworks.CoWorksFacilities;
+import pt.iade.projetosolar.models.dao.utils.Facility;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ public class CoworkInfo {
     private String name;
     private static Image logo;
     private ArrayList<SubscriptionInfo> subscriptionsInfo;
+    private String location;
+    private ArrayList<Facility> tags = new ArrayList<>();
 
 
     public CoworkInfo(CoWork coWork)
@@ -19,6 +23,10 @@ public class CoworkInfo {
         this.name = coWork.getName();
         //this.logo = coWork.getLogo(); TODO
         this.subscriptionsInfo = SubscriptionInfo.getSubscriptionInfo(coWork.getSubscriptions());
+        this.location = coWork.getLocation();
+        for (CoWorksFacilities facility : coWork.getFacilities()) {
+            this.tags.add(facility.getFacility());
+        }
     }
 
     public ArrayList<SubscriptionInfo> getSubscriptionsInfo() {
@@ -54,4 +62,6 @@ public class CoworkInfo {
     {
         return name;
     }
+
+    public ArrayList<Facility> getTags() {return tags;}
 }
