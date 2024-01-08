@@ -54,6 +54,22 @@ public class User {
 
     public void setName(String name) { this.userName = name; }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
     public void setPassword(String password) {
         if(LogInController.verifyPassword(password))
             this.password = password;
@@ -67,6 +83,7 @@ public class User {
             events.add(r.getEvent());
         return events;
     }
+
 
     public void addEvent(Event event, boolean userIsGoing, boolean userWantsNotification) {
         for(RSPV r : rsvp)
@@ -119,4 +136,5 @@ public class User {
 
         return spaces;
     }
+
 }
