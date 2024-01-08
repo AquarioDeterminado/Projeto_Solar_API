@@ -9,12 +9,15 @@
     stroke-miterlimit: 10;
 }
 .reservedTable {
-    fill: #ff0000;
-
+    fill: #FF9628;
 }
 .freeTable{
-    fill: #00ff00;
+    fill: #FFF1BC;
 }
 .notReservable {
-    fill: lightgrey;
+    fill: #AE5331;
 }
+.reservedByUser {
+    fill: #1A1EF5;
+}
+FF9628

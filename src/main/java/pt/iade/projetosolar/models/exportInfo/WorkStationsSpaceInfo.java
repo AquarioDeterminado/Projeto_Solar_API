@@ -9,20 +9,19 @@ public class WorkStationsSpaceInfo {
     private final String name;
     private final String address;
 
-    public WorkStationsSpaceInfo(int id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
+    private final double occupationRate;
+
+    public WorkStationsSpaceInfo(WorkStationsSpace space) {
+        this.id = space.getId();
+        this.name = space.getCoWork().getName();
+        this.address = space.getCoWork().getLocation();
+        this.occupationRate = space.getOccupancyRate();
     }
 
     public static ArrayList<WorkStationsSpaceInfo> getInfo(ArrayList<WorkStationsSpace> spaces) {
         ArrayList<WorkStationsSpaceInfo> spacesInfo = new ArrayList<>();
         for (WorkStationsSpace space : spaces) {
-            spacesInfo.add(new WorkStationsSpaceInfo(
-                space.getId(),
-                space.getCoWork().getName(),
-                space.getCoWork().getLocation()
-            ));
+            spacesInfo.add( new WorkStationsSpaceInfo(space));
         }
         return spacesInfo;
     }
@@ -30,6 +29,7 @@ public class WorkStationsSpaceInfo {
     public int getId() {return id;}
     public String getName() {return name;}
     public String getAddress() {return address;}
+    public double getOccupationRate() {return occupationRate;}
 
 
 }

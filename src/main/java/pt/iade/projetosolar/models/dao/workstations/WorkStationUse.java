@@ -24,5 +24,19 @@ public class WorkStationUse {
     @JoinColumn(name = "wus_wks_id")
     private WorkStation workStation;
 
+    public WorkStationUse(Date startTime, User user, WorkStation workStation) {
+        this.startTime = startTime;
+        this.user = user;
+        this.workStation = workStation;
+    }
+
+    public WorkStationUse() {
+
+    }
+
     public Date getEndTime() { return endTime; }
+
+    public User getUser() {
+        return user;
+    }
 }

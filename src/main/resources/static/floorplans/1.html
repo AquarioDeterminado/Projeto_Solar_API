@@ -4,9 +4,8 @@
 
 		<script type="text/javascript">
 			function reserve (self) {
-				console.log("id: " + self.id)
-				//loadStorage.setItem("id", _id);
-				//Android.reserveTable(_id);
+				Android.reserveTable(self.id);
+				localStorage.setItem("id",self.id);
 			}
 		</script>
 

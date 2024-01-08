@@ -2,14 +2,14 @@ package pt.iade.projetosolar.models.importInfo;
 
 import java.io.Serializable;
 
-public class UserId implements Serializable {
+public class Id implements Serializable {
     private int id;
 
-    public UserId(int id) {
+    public Id(int id) {
         this.id = id;
     }
 
-    public UserId() {}
+    public Id() {}
 
     public int id() {
         return id;

@@ -22,16 +22,16 @@ public class DeskReserveController {
         this.spaces = spaces;
     }
 
-    public Document getFloorPlanHTML(int spaceId) {
+    public Document getFloorPlanHTML(int spaceId, int userId) {
         WorkStationsSpace space = spaces.findById(spaceId).get();
         Document dom = getDOM(spaceId);
-        Document finalFloorPlan = CheckReservedTables(dom);
+        Document finalFloorPlan = CheckReservedTables(dom, userId);
         return finalFloorPlan;
     }
 
 
 
-    private Document CheckReservedTables(Document dom) {
+    private Document CheckReservedTables(Document dom, int userId) {
         Iterable<WorkStationsSpace> spaceList = spaces.findAll();
         for (WorkStationsSpace space : spaceList) {
             List<WorkStationsGroup> tableGroups = space.getTableGroups();
@@ -42,7 +42,10 @@ public class DeskReserveController {
 
                     String tableClass = "freeTable";
                     if (table.isReserved())
-                        tableClass = "reservedTable";
+                        if(table.reservedByUser(userId))
+                            tableClass = "reservedByUser";
+                        else
+                            tableClass = "reservedTable";
 
                     Element tableElement = dom.getElementById(tableId);
                     assert tableElement != null;

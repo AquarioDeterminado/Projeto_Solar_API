@@ -9,7 +9,7 @@ import pt.iade.projetosolar.controllers.repositories.UserRepository;
 import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
 import pt.iade.projetosolar.models.dao.users.User;
 import pt.iade.projetosolar.models.exportInfo.SubscriptionInfo;
-import pt.iade.projetosolar.models.importInfo.UserId;
+import pt.iade.projetosolar.models.importInfo.Id;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ public class SubscriptionsInfo {
     }
 
     @PostMapping(path = "/getUserSubscriptions")
-    public SubscriptionInfo[] getUserSubscriptions(@RequestBody UserId userId) {
-        User user = userRepository.findById(userId.id()).get();
+    public SubscriptionInfo[] getUserSubscriptions(@RequestBody Id id) {
+        User user = userRepository.findById(id.id()).get();
 
         List<SubscriptionRecord> subscriptions = user.getSubscriptions();
         ArrayList<SubscriptionInfo> response = SubscriptionInfo.getSubscriptionsInfo(subscriptions);

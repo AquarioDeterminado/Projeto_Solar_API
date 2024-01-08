@@ -1,7 +1,9 @@
 package pt.iade.projetosolar.models.dao.workstations;
 
 import jakarta.persistence.*;
+import pt.iade.projetosolar.models.dao.users.User;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,5 +30,19 @@ public class WorkStation {
                 return true;
 
         return false;
+    }
+
+    public boolean reservedByUser(int userId) {
+        for (WorkStationUse use : uses)
+            if (use.getEndTime() == null && use.getUser().getId() == userId)
+                return true;
+
+        return false;
+    }
+
+    public void reserve(User user) {
+        Date date = new Date(System.currentTimeMillis());
+        WorkStationUse use = new WorkStationUse(date, user, this);
+        uses.add(use);
     }
 }

@@ -35,4 +35,17 @@ public class WorkStationsSpace {
         }
         return tables;
     }
+
+    public double getOccupancyRate() {
+        double total = 0;
+        double occupied = 0;
+
+        for (WorkStation table : getTables()) {
+            total++;
+            if (table.isReserved())
+                occupied++;
+        }
+
+        return occupied / total;
+    }
 }

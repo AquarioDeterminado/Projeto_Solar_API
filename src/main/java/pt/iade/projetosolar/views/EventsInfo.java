@@ -1,6 +1,5 @@
 package pt.iade.projetosolar.views;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pt.iade.projetosolar.controllers.EventController;
@@ -9,7 +8,7 @@ import pt.iade.projetosolar.controllers.repositories.UserRepository;
 import pt.iade.projetosolar.models.dao.events.Event;
 import pt.iade.projetosolar.models.dao.users.User;
 import pt.iade.projetosolar.models.exportInfo.EventInfo;
-import pt.iade.projetosolar.models.importInfo.UserId;
+import pt.iade.projetosolar.models.importInfo.Id;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +26,17 @@ public class EventsInfo {
     }
 
     @PostMapping(path = "/getUserEvents", produces= MediaType.APPLICATION_JSON_VALUE)
-    public EventInfo[] getUserRSVP(@RequestBody UserId userId){
-        User user = userRepository.findById(userId.id()).get();
+    public EventInfo[] getUserRSVP(@RequestBody Id id){
+        User user = userRepository.findById(id.id()).get();
         List<Event> events = user.getEvents();
         List<EventInfo> eventsInfo = EventInfo.getEventsInfo(events);
         return eventsInfo.toArray(new EventInfo[0]);
     }
 
     @PostMapping(path = "/getAvailableEvents", produces= MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<EventInfo> getAvailableEvents(@RequestBody UserId userId){
+    public ArrayList<EventInfo> getAvailableEvents(@RequestBody Id id){
         EventController eventController = new EventController(eventsRepository);
-        User user = userRepository.findById(userId.id()).get();
+        User user = userRepository.findById(id.id()).get();
         ArrayList<Event> events = eventController.getUserAvailableEvents(user);
         ArrayList<EventInfo> eventsInfo = new ArrayList<>();
         for(Event event : events)
