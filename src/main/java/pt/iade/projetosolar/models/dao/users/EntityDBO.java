@@ -23,7 +23,7 @@ public class EntityDBO {
     @OneToOne(mappedBy = "entityDBO")
     private User user;
 
-    @OneToMany(mappedBy = "entity")
+    @OneToMany(mappedBy = "entityDBO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Susbcribed> subscribedGroups = new ArrayList<>();
 
     public void setId(Long id) {

@@ -42,7 +42,7 @@ public class WorkStationsSpace {
 
         for (WorkStation table : getTables()) {
             total++;
-            if (table.isReserved())
+            if (table.isBeingUsed())
                 occupied++;
         }
 

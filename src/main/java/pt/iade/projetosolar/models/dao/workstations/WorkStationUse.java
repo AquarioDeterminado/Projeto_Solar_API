@@ -36,6 +36,8 @@ public class WorkStationUse {
 
     public Date getEndTime() { return endTime; }
 
+    public void setEndTime(Date endTime) { this.endTime = endTime; }
+
     public User getUser() {
         return user;
     }

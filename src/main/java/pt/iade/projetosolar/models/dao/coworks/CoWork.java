@@ -2,6 +2,8 @@ package pt.iade.projetosolar.models.dao.coworks;
 
 import jakarta.persistence.*;
 import pt.iade.projetosolar.models.dao.events.Event;
+import pt.iade.projetosolar.models.dao.subscriptions.Subscription;
+import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
 import pt.iade.projetosolar.models.dao.utils.Facility;
 import pt.iade.projetosolar.models.dao.workstations.WorkStationsSpace;
 
@@ -38,6 +40,10 @@ public class CoWork {
 
     @OneToMany(mappedBy = "coWork", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CoWorksFacilities> facilities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "coWork", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Subscription> subscriptions = new ArrayList<>();
+
 
     public WorkStationsSpace getSpace(int spaceId) {
         for (WorkStationsSpace coworkSpace : coworkSpaces)
@@ -82,4 +88,7 @@ public class CoWork {
 
     public String getName() {return name;}
 
+    public List<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
 }

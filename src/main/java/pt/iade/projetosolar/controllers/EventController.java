@@ -1,25 +1,39 @@
 package pt.iade.projetosolar.controllers;
 
 import pt.iade.projetosolar.controllers.repositories.EventRepository;
+import pt.iade.projetosolar.controllers.repositories.UserRepository;
 import pt.iade.projetosolar.models.dao.coworks.CoWork;
 import pt.iade.projetosolar.models.dao.events.Event;
 import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
 import pt.iade.projetosolar.models.dao.users.User;
+import pt.iade.projetosolar.models.exportInfo.RSVPInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventController {
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
-    public EventController(EventRepository eventRepository) {
+    public EventController(EventRepository eventRepository, UserRepository userRepository) {
         this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
-    public Event attendEvent (User user, int eventId) {
+    public RSVPInfo attendEvent (int userId, int eventId) {
+        RSVPInfo rsvp = new RSVPInfo(eventId);
         Event event = eventRepository.findById(eventId).get();
-        user.addEvent(event, true, true);
-        return event;
+        User user = userRepository.findById(userId).get();
+
+        if(event.isFull()) {
+            rsvp.setError("Event is full");
+        } else {
+            rsvp.isSuccess();
+            user.addEvent(event, true, true);
+            userRepository.save(user);
+        }
+
+        return rsvp;
     }
 
     public Event removeRSVP(User user, int eventId) {
@@ -46,6 +60,8 @@ public class EventController {
                 availableEvents.add(event);
             }
         }
+
+        //availableEvents.removeAll(user.getEvents()); //App needs place holder for no events
         return availableEvents;
     }
 

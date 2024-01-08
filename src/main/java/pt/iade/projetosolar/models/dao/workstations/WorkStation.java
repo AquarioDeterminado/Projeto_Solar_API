@@ -24,7 +24,7 @@ public class WorkStation {
 
     public int getId() { return id; }
 
-    public boolean isReserved() {
+    public boolean isBeingUsed() {
         for (WorkStationUse use : uses)
             if (use.getEndTime() == null)
                 return true;
@@ -45,4 +45,12 @@ public class WorkStation {
         WorkStationUse use = new WorkStationUse(date, user, this);
         uses.add(use);
     }
+
+    public void free() {
+        Date date = new Date(System.currentTimeMillis());
+        for (WorkStationUse use : uses)
+            if (use.getEndTime() == null)
+                use.setEndTime(date);
+    }
+
 }

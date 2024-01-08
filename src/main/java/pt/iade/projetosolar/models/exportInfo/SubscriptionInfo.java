@@ -11,31 +11,34 @@ import java.util.List;
 public class SubscriptionInfo {
 
     private int id;
-    private CoworkInfo space;
     private String title;
     private double price;
     private Image subIcon;
     private Date nextRenewalDate;
+    private String spaceName;
 
     public SubscriptionInfo(SubscriptionRecord s) {
         Subscription subscription = s.getSubscription();
 
         this.setId(s.getId());
-        this.setSpace(new CoworkInfo(subscription.getCoWork()));
         this.setTitle(subscription.getName());
         this.setPrice(subscription.getPrice());
         //this.setSubIcon(subscription.getSubIcon()); TODO
         this.setNextRenewalDate(s.getNextRenewalDate());
     }
 
+    public SubscriptionInfo(Subscription s) {
+        this.setId(s.getId());
+        this.setTitle(s.getName());
+        this.setPrice(s.getPrice());
+        //this.setSubIcon(s.getSubIcon()); TODO
+        this.setNextRenewalDate(null);
+        this.spaceName = s.getCoWork().getName();
+    }
+
     public void setId(int id) {
         this.id = id;
     }
-
-    public void setSpace(CoworkInfo space) {
-        this.space = space;
-    }
-
 
     public void setTitle(String title) {
         this.title = title;
@@ -57,11 +60,6 @@ public class SubscriptionInfo {
         return id;
     }
 
-    public CoworkInfo getSpace() {
-        return space;
-    }
-
-
     public String getTitle() {
         return title;
     }
@@ -78,8 +76,15 @@ public class SubscriptionInfo {
         return nextRenewalDate;
     }
 
+    public String getSpaceName() {
+        return spaceName;
+    }
 
-    public static ArrayList<SubscriptionInfo> getSubscriptionsInfo(List<SubscriptionRecord> subscriptions) {
+    public void setSpaceName(String spaceName) {
+        this.spaceName = spaceName;
+    }
+
+    public static ArrayList<SubscriptionInfo> getSubscriptionRecordsInfo(List<SubscriptionRecord> subscriptions) {
         ArrayList<SubscriptionInfo> subscriptionsInfo = new ArrayList<>();
         for (SubscriptionRecord s : subscriptions) {
             SubscriptionInfo subscriptionInfo = new SubscriptionInfo(s);
@@ -87,4 +92,14 @@ public class SubscriptionInfo {
         }
         return subscriptionsInfo;
     }
+
+    public static ArrayList<SubscriptionInfo> getSubscriptionInfo(List<Subscription> subscriptions) {
+        ArrayList<SubscriptionInfo> subscriptionsInfo = new ArrayList<>();
+        for (Subscription s : subscriptions) {
+            SubscriptionInfo subscriptionInfo = new SubscriptionInfo(s);
+            subscriptionsInfo.add(subscriptionInfo);
+        }
+        return subscriptionsInfo;
+    }
+
 }

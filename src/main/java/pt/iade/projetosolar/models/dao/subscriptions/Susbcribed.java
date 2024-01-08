@@ -15,13 +15,15 @@ public class Susbcribed {
     @Column(name = "sud_is_active")
     private boolean active;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "sud_sus_id")
     private SubscriptionRecord subscription;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "sud_ent_id")
-    private EntityDBO entity;
+    private EntityDBO entityDBO;
 
     public SubscriptionRecord getSubscriptionRecord() {return subscription;}
+
+    public boolean isActive() {return active;}
 }

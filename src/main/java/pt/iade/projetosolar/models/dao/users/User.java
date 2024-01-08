@@ -69,6 +69,9 @@ public class User {
     }
 
     public void addEvent(Event event, boolean userIsGoing, boolean userWantsNotification) {
+        for(RSPV r : rsvp)
+            if(r.getEvent().equals(event))
+                return;
         RSPV rsvp = new RSPV(this, event, userIsGoing, userWantsNotification);
         this.rsvp.add(rsvp);
     }
@@ -83,11 +86,22 @@ public class User {
         }
     }
 
-    public List<SubscriptionRecord> getSubscriptions() {
+    public List<SubscriptionRecord> getOwnedSubscriptions() {
         List<SubscriptionRecord> subscriptions = new ArrayList<>();
         List<Susbcribed> subscribedGroups = entityDBO.getSubscribedGroups();
         for (Susbcribed s : subscribedGroups)
-            subscriptions.add(s.getSubscriptionRecord());
+            if (s.isActive())
+                subscriptions.add(s.getSubscriptionRecord());
+        return subscriptions;
+    }
+
+    public List<SubscriptionRecord> getSubscriptions() {
+        List<SubscriptionRecord> subscriptions = new ArrayList<>();
+        List<Susbcribed> subscribedGroups = this.entityDBO.getSubscribedGroups();
+        for (Susbcribed s : subscribedGroups)
+            if (s.isActive())
+                if (s.getSubscriptionRecord().isActive())
+                    subscriptions.add(s.getSubscriptionRecord());
         return subscriptions;
     }
 
@@ -99,10 +113,9 @@ public class User {
         List<WorkStationsSpace> coworkSpaces = new ArrayList<>();
         for (SubscriptionRecord s : subscriptions) {
             coworkSpaces = s.getCoWork().getCoworkSpaces();
-            if (!coworkSpaces.isEmpty())
-                spaces.addAll(coworkSpaces);
-
         }
+        if (!coworkSpaces.isEmpty())
+            spaces.addAll(coworkSpaces);
 
         return spaces;
     }

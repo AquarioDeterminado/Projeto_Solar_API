@@ -60,12 +60,33 @@ public class DeskReserve {
         User user = userRepository.findById(userId.id()).get();
 
         int id;
-        if(table.isReserved()){
+        if(table.isBeingUsed()){
             id = -1;
         } else {
             id = tableId;
             table.reserve(user);
             workStationRepository.save(table);
+        }
+
+        return id;
+    }
+
+    @PostMapping(path = "/checkout/{tableId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public int cancelReservation(@PathVariable int tableId, @RequestBody Id userId) {
+        WorkStation table = workStationRepository.findById(tableId).get();
+        User user = userRepository.findById(userId.id()).get();
+
+        int id;
+        if(!table.isBeingUsed()){
+            if(table.reservedByUser(userId.id())){
+                id = tableId;
+                table.free();
+                workStationRepository.save(table);
+            } else {
+                id = -1;
+            }
+        } else {
+            id = -1;
         }
 
         return id;

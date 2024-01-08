@@ -31,8 +31,17 @@ public class SubscriptionsInfo {
         User user = userRepository.findById(id.id()).get();
 
         List<SubscriptionRecord> subscriptions = user.getSubscriptions();
-        ArrayList<SubscriptionInfo> response = SubscriptionInfo.getSubscriptionsInfo(subscriptions);
+        ArrayList<SubscriptionInfo> response = SubscriptionInfo.getSubscriptionRecordsInfo(subscriptions);
 
         return response.toArray(new SubscriptionInfo[0]);
     }
+
+    @PostMapping(path = "/cancelSubscription")
+    public SubscriptionInfo cancelSubscription(@RequestBody Id subId) {
+        SubscriptionRecord subscriptionRecord = subscriptionRecordRepository.findById(subId.id()).get();
+        subscriptionRecord.deactivate();
+        subscriptionRecordRepository.save(subscriptionRecord);
+        return new SubscriptionInfo(subscriptionRecord);
+    }
+
 }

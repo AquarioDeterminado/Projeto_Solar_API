@@ -10,12 +10,23 @@ public class CoworkInfo {
     private final int id;
     private String name;
     private static Image logo;
+    private ArrayList<SubscriptionInfo> subscriptionsInfo;
+
 
     public CoworkInfo(CoWork coWork)
     {
         this.id = coWork.getId();
         this.name = coWork.getName();
         //this.logo = coWork.getLogo(); TODO
+        this.subscriptionsInfo = SubscriptionInfo.getSubscriptionInfo(coWork.getSubscriptions());
+    }
+
+    public ArrayList<SubscriptionInfo> getSubscriptionsInfo() {
+        return subscriptionsInfo;
+    }
+
+    public void setSubscriptionsInfo(ArrayList<SubscriptionInfo> subscriptionsInfo) {
+        this.subscriptionsInfo = subscriptionsInfo;
     }
 
     public static Image getLogo() {

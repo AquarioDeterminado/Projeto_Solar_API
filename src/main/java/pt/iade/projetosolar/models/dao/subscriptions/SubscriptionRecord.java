@@ -5,6 +5,7 @@ import pt.iade.projetosolar.models.dao.coworks.CoWork;
 import pt.iade.projetosolar.models.dao.users.Client;
 import pt.iade.projetosolar.models.dao.utils.RenewalStrategy;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -77,5 +78,13 @@ public class SubscriptionRecord {
         nextRenewalDate = calendar.getTime();
 
         return nextRenewalDate;
+    }
+
+    public void deactivate() {
+        this.active = false;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }

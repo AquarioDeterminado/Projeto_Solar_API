@@ -41,7 +41,7 @@ public class DeskReserveController {
                     String tableId = "table" + table.getId();
 
                     String tableClass = "freeTable";
-                    if (table.isReserved())
+                    if (table.isBeingUsed())
                         if(table.reservedByUser(userId))
                             tableClass = "reservedByUser";
                         else
@@ -93,7 +93,7 @@ public class DeskReserveController {
         int totalTables = tables.size();
         int reservedTables = 0;
         for (WorkStation table : tables) {
-            if (table.isReserved())
+            if (table.isBeingUsed())
                 reservedTables++;
         }
 
