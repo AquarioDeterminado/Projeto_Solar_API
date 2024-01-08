@@ -2,16 +2,16 @@ package pt.iade.projetosolar.models.exportInfo;
 
 import pt.iade.projetosolar.models.dao.users.User;
 
-public class LogInResponse {
+public class IdAndErrorResponse {
     private int id;
     private String error;
 
-    public LogInResponse(User user) {
-        this.id = user.getId();
-        this.error = null;
+    public IdAndErrorResponse(int id) {
+        this.id = id;
+        this.error = "";
     }
 
-    public LogInResponse(String error) {
+    public IdAndErrorResponse(String error) {
         this.id = 0;
         this.error = error;
     }

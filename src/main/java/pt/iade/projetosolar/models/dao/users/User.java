@@ -7,10 +7,13 @@ import pt.iade.projetosolar.models.dao.events.RSPV;
 import pt.iade.projetosolar.models.dao.subscriptions.SubscriptionRecord;
 import pt.iade.projetosolar.models.dao.subscriptions.Susbcribed;
 import pt.iade.projetosolar.models.dao.workstations.WorkStationsSpace;
+import pt.iade.projetosolar.models.exportInfo.IdAndErrorResponse;
+import pt.iade.projetosolar.models.importInfo.AuthChangeUserString;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "individual")
@@ -52,6 +55,10 @@ public class User {
         return id;
     }
 
+    public String getPassword() {
+        return this.password;
+    }
+
     public void setName(String name) { this.userName = name; }
 
     public String getEmail() {
@@ -70,9 +77,20 @@ public class User {
         return creationDate;
     }
 
-    public void setPassword(String password) {
-        if(LogInController.verifyPassword(password))
-            this.password = password;
+    public IdAndErrorResponse setPassword(AuthChangeUserString passwordRequest) {
+        IdAndErrorResponse response = null;
+        if (this.password.equals(passwordRequest.getPassword())) {
+            if (LogInController.verifyPassword(passwordRequest.getNewValue())) {
+                this.password = passwordRequest.getNewValue();
+                response = new IdAndErrorResponse(this.id);
+            } else {
+                response = new IdAndErrorResponse("Please use a special character (ex: !@#)");
+            }
+        } else {
+            response = new IdAndErrorResponse("Password is incorrect");
+        }
+
+        return response;
     }
 
     public List<RSPV> getRSVPs() { return rsvp; }

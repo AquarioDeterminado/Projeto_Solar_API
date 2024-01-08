@@ -2,6 +2,7 @@ package pt.iade.projetosolar.controllers;
 
 import pt.iade.projetosolar.controllers.repositories.UserRepository;
 import pt.iade.projetosolar.models.dao.users.User;
+import pt.iade.projetosolar.models.importInfo.AuthChangeUserString;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -49,8 +50,7 @@ public class LogInController {
     }
 
     public static boolean verifyPassword(String password) {
-        CharSequence specialChars = "!@#$%^&*()_+";
-        return  !passwordContainsSpecialChars(password) || password.length() < 6;
+        return  passwordContainsSpecialChars(password) || password.length() < 6;
     }
 
     private static boolean passwordContainsSpecialChars(String password) {
@@ -79,7 +79,7 @@ public class LogInController {
             } else {
                 userRepository.findById(userId)
                         .map(user -> {
-                            user.setPassword(newPassword);
+                            user.setPassword(new AuthChangeUserString(user.getId(), user.getPassword(), newPassword));
                             return userRepository.save(user);
                         });
                 return true;
